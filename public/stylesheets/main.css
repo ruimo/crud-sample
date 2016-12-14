@@ -37,6 +37,10 @@ dt {
     padding: 3px 3px 10px 3px;
 }
 
+.logo img {
+    max-height: 100px;
+}
+
 .menuLink {
     border-left: solid blue 8px;
     background: LightCyan;
