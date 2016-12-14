@@ -1,0 +1,34 @@
+@import play.api.mvc.Call
+
+@(
+  myForm: Form[User], formId: String, submitButtonClass: String, postUrl: Call
+)(
+  implicit messagesApi: play.api.i18n.Messages,
+  header: RequestHeader
+)
+
+@myForm.globalErrors.map { e =>
+  <div class="error global">
+    @e.message
+  </div>
+}
+
+@helper.form(action = helper.CSRF(postUrl), 'id -> formId) {
+  @helper.inputText(myForm("userName"), 'size -> 24)
+
+  @myForm("password").errors.map { err =>
+    <div class="error">
+      @err.message
+    </div>
+  }
+  @helper.inputPassword(
+    myForm("password.main"),
+    '_label -> Messages("password"), 'size -> 24
+  )
+  @helper.inputPassword(
+    myForm("password.confirm"),
+    '_label -> Messages("passwordConfirm"), 'size -> 24
+  )
+  <input type="submit" class="@submitButtonClass button">
+}  
+

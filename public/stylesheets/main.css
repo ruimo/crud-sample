@@ -1,0 +1,72 @@
+.createdUsers {
+    padding: 12px 0px 0px 0px;
+}
+
+table {
+    background: MintCream;
+    width: 100%;
+}
+
+.pageControl {
+    text-align: right;
+    padding: 12px;
+}
+
+th {
+    background: DeepSkyBlue;
+    text-color: white;
+}
+
+dl {
+    background: MintCream;
+    padding: 12px;
+    box-shadow: 5px 5px 10px;
+}
+
+dt {
+    border-left: solid black 8px;
+    padding: 4px;
+}
+
+.loginPanel {
+    float: right;
+}
+
+.logo {
+    float: left;
+    padding: 3px 3px 10px 3px;
+}
+
+.menuLink {
+    border-left: solid blue 8px;
+    background: LightCyan;
+    padding: 6px;
+}
+
+.sep {
+    clear: both;
+}
+
+.header,.main {
+    padding: 10px 10px 0px 10px;
+    box-shadow: 5px 5px 10px;
+    border-spacing: 5px;
+}
+
+#logoffForm {
+    display: inline-block;
+}
+
+.error {
+    background-color: MistyRose;
+    color: red;
+}
+
+.backLink {
+    padding: 3px;
+    background: MintCream;
+}
+
+.backLinkWrapper {
+    padding: 12px 0px 0px 0px;
+}

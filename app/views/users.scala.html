@@ -1,0 +1,74 @@
+@(
+  users: PagedRecords[User], removeForm: Form[Long]
+)(
+  implicit loginUser: LoginUser,
+  request: RequestHeader,
+  flash: Flash,
+  messagesApi: play.api.i18n.Messages
+)
+
+@helper.form(action = helper.CSRF(routes.UserController.removeUser()), 'id -> "removeForm") {
+  <input type="hidden" name="id" class="userId" value="">
+}
+
+@main(Messages("userMaintenance"), Some(loginUser)) {
+  <h1>@Messages("userMaintenance")</h1>
+
+  <div class="menuLink startCreateUser">
+    <a href="@routes.UserController.startCreateUser()">@Messages("createUser")</a>
+  </div>
+
+  <div class="createdUsers">
+    @recordTable(
+      users,
+      (page, pageSize, orderBy) => routes.UserController.index(page, pageSize, orderBy)
+    ) {
+      @simpleRecordTableHeader("users.id", users.pageSize, users.orderBy, routes.UserController.index)
+      @simpleRecordTableHeader("users.user_name", users.pageSize, users.orderBy, routes.UserController.index)
+      <th></th>
+    } {
+      @users.records.map { m =>
+        <tr>
+          <td><a href="@routes.UserController.editUser(m.id.value)">@m.id.value</a></td>
+          <td><a href="@routes.UserController.editUser(m.id.value)">@m.userName</a></td>
+          <td>
+            <button type="button" class="button" onclick="removeUser(@m.id.value, '@m.userName');">
+              @Messages("remove")
+            </button>
+          </td>
+        </tr>
+      }
+    }
+  </div>
+
+  @backMenu()
+
+  <div id="removeDialog"></div>
+
+  <script>
+    var removeUser = function(id, userName) {
+      var dlg = $("#removeDialog");
+      dlg.text(userName + "@Messages("deleteConfirm")");
+      dlg.dialog({
+        modal: true,
+        buttons: [
+          {
+            text: '@Messages("yes")',
+            class: 'yes-button',
+            click: function() {
+              $("#removeForm .userId").attr("value", id);
+              $("#removeForm").submit();
+            }
+          },    
+          {
+            text: '@Messages("no")',
+            class: 'no-button',
+            click: function() {
+              $(this).dialog('close');
+            }
+          }
+        ]
+      });
+    }
+  </script>
+}

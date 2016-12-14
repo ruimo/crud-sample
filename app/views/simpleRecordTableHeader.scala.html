@@ -1,0 +1,14 @@
+@(
+  colName: String,
+  pageSize: Int,
+  orderBy: OrderBy,
+  showAction: (Int, Int, String) => Call
+)(
+  implicit messagesApi: play.api.i18n.Messages
+)
+
+<th>
+  <a href="#" onclick="location.href='@showAction(0, pageSize, if (orderBy.columnName == colName) {orderBy.invert.toString} else {colName});'">
+    @if(orderBy.columnName == colName) { @if(orderBy.order == Asc) {&#x25B2;} else {&#x25BC;}}@Messages(colName)
+  </a>
+</th>

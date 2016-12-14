@@ -1,0 +1,17 @@
+@(
+)(
+  implicit messagesApi: play.api.i18n.Messages,
+  request: RequestHeader,
+  flash: Flash,
+  loginUser: Option[LoginUser]
+)
+
+@main(Messages("top"), loginUser) {
+  <h1>@Messages("top")</h1>
+
+  <div class="menuLink userMaintenance">
+    <a href="@routes.UserController.index()">@Messages("userMaintenance")</a>
+  </div>
+
+  <br>
+}

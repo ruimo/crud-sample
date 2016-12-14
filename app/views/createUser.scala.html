@@ -1,0 +1,16 @@
+@(
+  myForm: Form[User]
+)(
+  implicit messagesApi: play.api.i18n.Messages,
+  request: RequestHeader,
+  loginUser: LoginUser,
+  flash: Flash
+)
+
+@main(Messages("createUser"), Some(loginUser)) {
+  <h1>@Messages("createUser")</h1>
+
+  @userForm(myForm, "createForm", "createButton", routes.UserController.createUser())
+
+  @userBackMenu()
+}

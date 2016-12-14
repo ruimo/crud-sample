@@ -1,0 +1,23 @@
+@(
+  myForm: Form[Login], url: String
+)(
+  implicit messagesApi: play.api.i18n.Messages,
+  request: RequestHeader,
+  flash: Flash
+)
+
+@main(Messages("login"), None) {
+  <h1>@Messages("login")</h1>
+
+  @myForm.globalErrors.map { error =>
+    <div class="error">@error.message</div>
+  }
+  @helper.form(action = helper.CSRF(routes.UserController.login(url)), 'class -> "loginForm") {
+    @helper.inputText(myForm("userName"), 'size -> 24)
+    @helper.inputPassword(myForm("password"), 'size -> 24)
+
+    <input type="submit" class="loginButton button">
+  }
+
+  @backMenu()
+}

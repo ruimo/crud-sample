@@ -1,0 +1,8 @@
+@(
+  user: User,
+  editAction: Long => Call
+)(
+  implicit messagesApi: play.api.i18n.Messages
+)
+
+<td><a href="@editAction(user.id.value)">@m.id.value</a></td>

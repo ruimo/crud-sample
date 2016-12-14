@@ -1,0 +1,20 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index
+
+GET     /admin/listUser             controllers.UserController.index(page: Int ?= 0, pageSize: Int ?= 10, orderBySpec ?= "users.user_name")
+GET     /admin/createUser           controllers.UserController.startCreateUser()
+POST    /admin/createUser           controllers.UserController.createUser()
+GET     /admin/editUser             controllers.UserController.editUser(id: Long)
+POST    /admin/editUser             controllers.UserController.updateUser(id: Long)
+POST    /admin/removeUser           controllers.UserController.removeUser()
+
+GET     /login                      controllers.UserController.startLogin(url: String)
+POST    /login                      controllers.UserController.login(url: String)
+POST    /secure/logoff              controllers.UserController.logoff()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

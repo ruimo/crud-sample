@@ -1,0 +1,17 @@
+@(
+  id: UserId,
+  myForm: Form[User]
+)(
+  implicit messagesApi: play.api.i18n.Messages,
+  loginUser: LoginUser,
+  request: RequestHeader,
+  flash: Flash
+)
+
+@main(Messages("editUser"), Some(loginUser)) {
+  <h1>@Messages("editUser")</h1>
+
+  @userForm(myForm, "updateForm", "updateButton", routes.UserController.updateUser(id.value))
+
+  @userBackMenu()
+}

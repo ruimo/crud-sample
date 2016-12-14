@@ -1,0 +1,32 @@
+@(
+  records: PagedRecords[_],
+listAction: (Int, Int, String) => Call
+)(
+  tableHeader: Html
+)(
+  tableBody: Html
+)(
+  implicit messagesApi: play.api.i18n.Messages
+)
+
+@if(records.pageCount == 0) {
+  <div class="norecords">
+    @Messages("noRecords")
+  </div>
+} else {
+  <table class="records">
+    <tr>
+      @tableHeader
+    </tr>
+    @tableBody
+  </table>
+
+  <div class="pageControl">
+    <button class="button" type="button" onclick="location.href='@listAction(records.currentPage - 1, records.pageSize, records.orderBy.toString)';" @if(! records.prevPageExists) {disabled}> &#x25C0; </button>
+  
+    <span class="pageLocation">@{records.currentPage + 1} / @{records.pageCount}</span>
+  
+    <button class="button" type="button" onclick="location.href='@listAction(records.currentPage + 1, records.pageSize, records.orderBy.toString)';" @if(! records.nextPageExists) {disabled}> &#x25B6; </button>
+  </div>
+}
+  

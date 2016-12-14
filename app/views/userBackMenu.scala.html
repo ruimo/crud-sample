@@ -1,0 +1,11 @@
+@()(
+  implicit messagesApi: play.api.i18n.Messages
+)
+
+<div class="backLinkWrapper">
+  <div class="backLink">
+    <a href="@routes.UserController.index()">@Messages("back", Messages("userMaintenance"))</a>
+  </div>
+</div>
+
+@backMenu()
